@@ -8,8 +8,15 @@ public class ConjuredItem extends Item {
         super(name, sellIn, quality);
     }
 
-    public int decreaseQuality () {
-        super.quality = super.quality - 1 * ConjuredItem.DECREASE_QUALITY_MULTIPLICATOR;
-        return super.quality > 0 ? super.quality : 0;
+    //could be an override method from Item
+    public void endOfTheDayUpdate () {
+        super.sellIn = super.sellIn - 1;
+
+        if(sellIn < 0 )
+            super.quality = super.quality - 1 * ConjuredItem.DECREASE_QUALITY_MULTIPLICATOR * 2;
+        else
+            super.quality = super.quality - 1 * ConjuredItem.DECREASE_QUALITY_MULTIPLICATOR;
+
+        super.quality = super.quality > 0 ? super.quality : 0;
     }
 }
